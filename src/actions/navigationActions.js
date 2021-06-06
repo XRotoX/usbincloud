@@ -1,0 +1,4 @@
+module.exports = {
+    DRAWER_OPENED: "DRAWER_OPENED",
+    DRAWER_CLOSED: "DRAWER_CLOSED"
+}
