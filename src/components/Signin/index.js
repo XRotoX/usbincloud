@@ -23,12 +23,11 @@ import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { useAuth } from '../../utils/AuthContext'
+import googleProvider from '../../utils/Firebase'
 import { useHistory } from 'react-router-dom'
 import Copyright from '../Copyright'
 import Divider from '@material-ui/core/Divider';
-import TwitterIcon from '@material-ui/icons/Twitter';
-import FacebookIcon from '@material-ui/icons/Facebook';
-
+import HowToRegIcon from '@material-ui/icons/HowToReg';
 
 var rsd = require("random-string-detection");
 
@@ -79,7 +78,7 @@ export default function SignUp() {
   const classes = useStyles()
   const emailRef = useRef()
   const passRef = useRef()
-  const { signin } = useAuth()
+  const { signin, signupWithGoogle } = useAuth()
   const history = useHistory()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -110,6 +109,18 @@ export default function SignUp() {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+
+  async function handleGoogleSignup(){
+    try {
+      setError('')
+      await signupWithGoogle()
+      history.push('/dashboard')
+    } catch (error) {
+      console.log(error)
+      setError(error.message)
+      setOpen(true)
+    }
+  }
 
   async function handleSignin(e) {
     e.preventDefault()
@@ -227,25 +238,14 @@ export default function SignUp() {
             size="large"
             fullWidth
             className={classes.button}
-            startIcon={<FacebookIcon />}
+            startIcon={<HowToRegIcon />}
+            onClick={handleGoogleSignup}
           >
-            Continue with Facebook
+            Continue with Google
           </Button>
           </div>
 
-          <div className={classes.wrapper}>
-
-          <Button
-            variant="contained"
-            size="large"
-            fullWidth
-            className={classes.button}
-            startIcon={<TwitterIcon />}
-          >
-            Continue with Twitter
-          </Button>
-          </div>
-
+         
           <Grid container justify="center">
             <Grid item>
               <Link href="/forgot-password" variant="body2">

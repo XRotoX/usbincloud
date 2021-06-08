@@ -3,7 +3,6 @@ import "firebase/auth"
 import "firebase/firestore"
 import "firebase/storage"
 
-var serviceAccount = require("../usbincloud.json")
 
 // apiKey: "AIzaSyBs0k-8Ymf2dk0L_mWXzHdOGFZKwa67hS8",
 //     authDomain: "stockage-gestion-de-fichiers.firebaseapp.com",
@@ -29,11 +28,13 @@ const fireDB = app.firestore()
 export const database = {
     folders: fireDB.collection('folders'),
     files: fireDB.collection('files'),
+    users: fireDB.collection('users'),
     formatDoc: doc => {
         return { id: doc.id, ...doc.data() }
     },
     getCurrentTimestamp: firebase.firestore.FieldValue.serverTimestamp
 }
+
 export const auth = app.auth()
 export const storage = app.storage()
 

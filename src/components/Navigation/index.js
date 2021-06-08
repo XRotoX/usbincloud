@@ -77,13 +77,17 @@ export default function Navigation(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [state, dispatch] = useReducer(navigationReducer, { open: false });
 
+
   const menuOpen = Boolean(anchorEl);
 
+  var title = "Home"
+  if (props.currentFolder) { title = props.currentFolder.name === "Root" ? "Home" : `${props.currentFolder.name}` }
 
   const handleTheme = () => {
-    theme.palette.type === "light" ? theme.palette.type = "dark" : theme.palette.type = "light"
-    //TO Revise: why not toggling IconButton
-    console.log(theme.palette.type === "dark");
+    // use reducer
+    //props.dark ? theme.palette.type = "dark" : theme.palette.type = "light"
+    //props.setDark(props.dark==="true" ? "false" : "true")
+    //localStorage.setItem("dark", props.dark);
   }
 
   const handleDrawerOpen = () => {
@@ -130,7 +134,7 @@ export default function Navigation(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Photos
+            {title}
           </Typography>
           {auth && (
             <div>
@@ -139,7 +143,7 @@ export default function Navigation(props) {
                 onClick={handleTheme}
                 color="inherit"
               >
-                {theme.palette.type === "dark" ? (<Brightness7RoundedIcon />) : (<Brightness4RoundedIcon />) }
+                {props.dark === "true" ? (<Brightness4RoundedIcon />) : (<Brightness7RoundedIcon />)}
               </IconButton>
               <IconButton
                 aria-label="account of current user"
@@ -166,7 +170,6 @@ export default function Navigation(props) {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
                 <MenuItem onClick={handleLogout} disabled={loading}>Logout</MenuItem>
               </Menu>
             </div>

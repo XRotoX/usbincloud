@@ -5,10 +5,8 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
 import FolderOpenRoundedIcon from '@material-ui/icons/FolderOpenRounded';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Box from '@material-ui/core/Box';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { blue } from '@material-ui/core/colors';
 import { database } from '../../utils/Firebase'
@@ -40,9 +38,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function FormDialog({ currentFolder }) {
+export default function FormDialog({ currentFolder, open, setOpen }) {
     const classes = useStyles()
-    const [open, setOpen] = React.useState(false)
     const [name, setName] = React.useState("")
     const [message, setMessage] = React.useState("")
     const [error, setError] = React.useState("")
@@ -50,13 +47,6 @@ export default function FormDialog({ currentFolder }) {
     const [loading, setLoading] = React.useState(false)
     const { currentUser } = useAuth()
 
-    const handleClickOpen = () => {
-        setError('')
-        setMessage('')
-        setSnackbar(false)
-        setLoading(false)
-        setOpen(true);
-    };
 
     const handleSnackbarClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -77,19 +67,22 @@ export default function FormDialog({ currentFolder }) {
             setMessage('')
             setLoading(true)
 
+            //TODO restrict folder name: regex
             if (currentFolder == null) return
 
             const path = [...currentFolder.path]
             if (currentFolder !== ROOT_FOLDER) {
-                path.push({ name: currentFolder.name, id: currentFolder.id })
+                path.push({id: currentFolder.id })
             }
 
+            
             await database.folders.add({
                 name: name,
                 parentId: currentFolder.id,
                 userId: currentUser.uid,
                 path: path,
                 createdAt: database.getCurrentTimestamp(),
+                isPublic: false
             })
             setName("")
             setMessage("Folder created successfully.")
@@ -106,15 +99,7 @@ export default function FormDialog({ currentFolder }) {
     const action = { icon: <FolderOpenRoundedIcon />, name: 'New' }
 
     return (
-        <div>
-            <SpeedDialAction
-                key={action.name}
-                icon={action.icon}
-                tooltipTitle={action.name}
-                tooltipOpen
-                onClick={handleClickOpen}
-            >
-            </SpeedDialAction>
+        <>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">New folder</DialogTitle>
                 <DialogContent>
@@ -136,9 +121,9 @@ export default function FormDialog({ currentFolder }) {
                         Cancel
                                 </Button>
                     <div className={classes.wrapper}>
-                        <Button onClick={handleCreate} color="primary" disabled={loading}>
+                        <Button type="submit" onClick={handleCreate} color="primary" disabled={loading}>
                             Create
-                                    </Button>
+                        </Button>
                         {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
                     </div>
 
@@ -158,6 +143,6 @@ export default function FormDialog({ currentFolder }) {
                     </Alert>
                 </Snackbar>
             }
-        </div>
+        </>
     );
 }

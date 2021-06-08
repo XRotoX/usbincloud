@@ -32,7 +32,7 @@ export default function IconBreadcrumbs() {
 
   return (
     <Breadcrumbs aria-label="breadcrumb" className={classes.root}>
-      <Link color="inherit" href="/" onClick={handleClick} className={classes.link}>
+      <Link color="inherit" href="/dashboard/" onClick={handleClick} className={classes.link}>
         <HomeIcon className={classes.icon} />
         Home
       </Link>

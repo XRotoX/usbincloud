@@ -76,7 +76,7 @@ export default function ShareDialog(props) {
         <DialogContent dividers>
 
           <Typography gutterBottom>
-            https://www.usbincloud.ml/file/ER-fe43sa8/{props.name}
+            https://www.usbincloud.ml/dashboard/s/{props.id}
           </Typography>
         </DialogContent>
         <DialogActions>

@@ -7,38 +7,42 @@ import SigninPage from './pages/signin'
 import SignupPage from './pages/signup'
 import resetPassword from './pages/resetPassowrd'
 import PrivateRoute from './utils/PrivateRoute';
-import {ThemeProvider, createMuiTheme} from '@material-ui/core/styles'
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 // import Pricing from './components/Pricing'
 // import Checkout from './components/Checkout/Checkout'
 //import Drawer from './components/Drawer'
 
 
 // TODO: Problems to solve
-// Speed dial icons doen't appear
+// Speed dial icons doesn't appear
 // Speed dial not sticky
-const darkTheme = createMuiTheme({
-  palette: {
-    type: 'light',
 
-  },
-});
+
 
 
 function App() {
+  const [dark, setDark] = React.useState(localStorage.getItem("dark"));
+  const Theme = createMuiTheme({
+    palette: {
+      type: dark === "true" ? 'dark' : 'dark',
+    },
+  });
   return (
     <React.Fragment>
-      <ThemeProvider theme={darkTheme}> 
-      <CssBaseline />
-      <Router>
-        <AuthProvider>
-          <Switch>
-            <PrivateRoute path="/dashboard" component={Dashboard} />
-            <Route path="/signup" component={SignupPage} />
-            <Route path="/signin" component={SigninPage} />
-            <Route path="/forgot-password" component={resetPassword} />
+      <ThemeProvider theme={Theme}>
+        <CssBaseline />
+        <Router>
+          <AuthProvider>
+            <Switch>
+              <PrivateRoute exact path="/dashboard" component={Dashboard}/>
+              <Route exact path="/dashboard/s/:itemId" component={Dashboard} />
+              <PrivateRoute exact path="/dashboard/i/:itemId" component={Dashboard} />
+              <Route path="/signup" component={SignupPage} />
+              <Route path="/signin" component={SigninPage} />
+              <Route path="/forgot-password" component={resetPassword} />
             </Switch>
-        </AuthProvider>
-      </Router>
+          </AuthProvider>
+        </Router>
       </ThemeProvider>
     </React.Fragment>
   )
