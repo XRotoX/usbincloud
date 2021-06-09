@@ -84,6 +84,7 @@ export default function FormDialog({ currentFolder, open, setOpen }) {
                 createdAt: database.getCurrentTimestamp(),
                 isPublic: false
             })
+            
             setName("")
             setMessage("Folder created successfully.")
             setOpen(false)

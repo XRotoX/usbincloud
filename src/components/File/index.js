@@ -19,6 +19,9 @@ import Avatar from '@material-ui/core/Avatar';
 import FolderIcon from '@material-ui/icons/Folder';
 import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile'
 import ShareDialog from '../Dialog/ShareDialog'
+import CustomSnackbar from '../Snackbar'
+import { database } from '../../utils/Firebase'
+
 
 
 const useStyles = makeStyles({
@@ -36,10 +39,14 @@ const useStyles = makeStyles({
 export default function File({ metadata }) {
     const classes = useStyles();
 
-    //const [auth, setAuth] = React.useState(true);
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false)
+    const [success, setSuccess] = useState(false)
+    const [message, setMessage] = useState('')
     const open = Boolean(anchorEl);
+
+
 
     React.useEffect(() => {
           let timer1 = setTimeout(() => setLoading(false), 1500);
@@ -48,6 +55,38 @@ export default function File({ metadata }) {
           };
         },[]);
 
+    const handleDelete = async () => {
+        setAnchorEl(null);
+        setError(false)
+        setSuccess(false)
+        setMessage('')
+        try {
+            const db = metadata.type === "file" ? database.files : database.folders 
+            console.log(metadata.id);
+            await db.doc(metadata.id).delete()
+            setSuccess(true)
+            setMessage("Deleted successfully")
+        } catch (error) {
+            setError(false)
+            setMessage("Error: Couldn\'t delete item")
+        }
+    }
+
+    const handleRename = async () => {
+        setAnchorEl(null);
+        setError(false)
+        setSuccess(false)
+        setMessage('')
+        try {
+            const db = metadata.type === "file" ? database.files : database.folders 
+            await db.doc(metadata.id).update({name: "Renamed3"})
+            setSuccess(true)
+            setMessage("Renamed successfully")
+        } catch (error) {
+            setError(false)
+            setMessage("Error: Couldn\'t rename item")
+        }
+    }
 
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
@@ -76,7 +115,7 @@ export default function File({ metadata }) {
 
                     }
                     title={<Typography className={classes.title}>{metadata.name}</Typography>}
-                    subheader="Now"
+                    subheader={metadata.createdAt.toDate().toLocaleDateString('fr-FR') || "now"}
                     className={classes.CardHeader}
                 />
                 <Menu
@@ -94,8 +133,8 @@ export default function File({ metadata }) {
                     open={open}
                     onClose={handleClose}
                 >
-                    <MenuItem onClick={handleClose}>Delete</MenuItem>
-                    <MenuItem onClick={handleClose}>Rename</MenuItem>
+                    <MenuItem onClick={handleDelete}>Delete</MenuItem>
+                    <MenuItem onClick={handleRename}>Rename</MenuItem>
                 </Menu>
 
                 <CardActionArea
@@ -133,7 +172,7 @@ export default function File({ metadata }) {
                     <ShareDialog name="Hiprops" id={metadata.id}/>
                 </CardActions>
             </Card>
-
+            <CustomSnackbar status={success ? 0 : 1} message={message} setMessage={setMessage}/>
         </Grid>
     );
 }

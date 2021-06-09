@@ -138,7 +138,8 @@ export default function Navigation(props) {
           </Typography>
           {auth && (
             <div>
-              <IconButton
+              <IconButton 
+                disabled
                 aria-controls="menu-appbar"
                 onClick={handleTheme}
                 color="inherit"
@@ -169,7 +170,7 @@ export default function Navigation(props) {
                 open={menuOpen}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem disabled onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleLogout} disabled={loading}>Logout</MenuItem>
               </Menu>
             </div>

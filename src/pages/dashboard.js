@@ -30,7 +30,7 @@ export default function Dashboard(props) {
         <>
             <Navigation currentFolder={folder} >
                 <DisplayContainer>
-                    <Breadcrumb currentFolder={folder} />
+                    {/* <Breadcrumb currentFolder={folder} /> */}
                     <Grid container spacing={2}>
                         <Suspense fallback={<CircularProgress />}>
                             <CenteredGrid>

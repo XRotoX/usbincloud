@@ -27,6 +27,7 @@ const styles = (theme) => ({
 
 const DialogTitle = withStyles(styles)((props) => {
   const { children, classes, onClose, ...other } = props;
+
   return (
     <MuiDialogTitle disableTypography className={classes.root} {...other}>
       <Typography variant="h6">{children}</Typography>
@@ -54,6 +55,8 @@ const DialogActions = withStyles((theme) => ({
 
 export default function ShareDialog(props) {
   const [open, setOpen] = React.useState(false);
+  const [link, setLink] = React.useState(`https://www.usbincloud.ml/s/${props.id}`)
+
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -61,6 +64,16 @@ export default function ShareDialog(props) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleCopy = () => {
+    var input = document.createElement('input');
+    input.setAttribute('value', link);
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand('copy');
+    document.body.removeChild(input);
+    setOpen(false);
+  }
 
   return (
     <div>
@@ -71,16 +84,16 @@ export default function ShareDialog(props) {
       </Button>
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Modal title
+          Public link
         </DialogTitle>
         <DialogContent dividers>
 
           <Typography gutterBottom>
-            https://www.usbincloud.ml/dashboard/s/{props.id}
+            {link}
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose} color="primary" startIcon={<FilterNoneRoundedIcon />}>
+          <Button autoFocus onClick={handleCopy} color="primary" startIcon={<FilterNoneRoundedIcon />}>
             Copy
           </Button>
         </DialogActions>
