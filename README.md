@@ -27,7 +27,7 @@ Firebase is the all in one to go platform when it comes to BaaS. It covers Cloud
 
 # PWA
 
-When it comes to optimizing the user experience and the eye contact needed for more frequent usage and engagement, it is necessary to be installed on the user's device. PWA makes converting your web app to an installable one easy, with a call to action button embedded in the browser. 
+When it comes to optimizing the user experience and the eye contact needed for more frequent usage and engagement, it is necessary to be installed on the user's device. PWA makes converting your web app to an installable one easy, with a call to action button embedded in the browser
 
 Given the features provided by Firebase, the user can access data and experience some features even offline.
 
