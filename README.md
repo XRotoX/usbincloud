@@ -1,6 +1,6 @@
 # USB in Cloud
 
-This project can be found at [the following link](https://usb-in-cloud.web.app/).
+This project DEMO can be found at [the following link](https://usb-in-cloud.web.app/).
 
 USB in cloud is a Google drive concept clone. It allows users to store files in an hierarchical composition to help arranging content based on their subjects and themes.
 
