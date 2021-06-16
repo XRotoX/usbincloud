@@ -2,16 +2,16 @@
 
 This project DEMO can be found at [the following link](https://usb-in-cloud.web.app/).
 
-USB in cloud is a Google drive concept clone. It allows users to store files in an hierarchical composition to help arranging content based on their subjects and themes.
+USB in cloud is a Google drive concept clone. It allows users to store files in an hierarchical composition to help arrange content based on their subjects and themes.
 
-USB in cloud is a fast, easy and powerful tool to store and access data using personal account from anywhere.
+USB in cloud is a fast, easy and powerful tool to store and access data using a personal account from anywhere.
 
 ![USB in Cloud](https://raw.githubusercontent.com/XRotoX/usbincloud/main/screenshots/dashboard.png)
 
 
 # React
 
-React is a front-end JavaScript library for building user interfaces or UI components. It helps writing cleaner code using react hooks introduced in react 16.8, which enabled using functions rather than classes and components life cycle management.
+React is a front-end JavaScript library for building user interfaces or UI components. It helps writing cleaner code using react hooks introduced in react 16.8, which enables using functions rather than classes and components life cycle management.
 
 # Material-ui
 
@@ -27,7 +27,7 @@ Firebase is the all in one to go platform when it comes to BaaS. It covers Cloud
 
 # PWA
 
-When it comes to optimizing the user experience and the eye contact needed for more often usage and engagement, it is neccessary to be installed on the user's device. PWA makes converting your web app to an installable one easy, with a call to action button embeded in the browser. 
+When it comes to optimizing the user experience and the eye contact needed for more frequent usage and engagement, it is necessary to be installed on the user's device. PWA makes converting your web app to an installable one easy, with a call to action button embedded in the browser. 
 
 Given the features provided by Firebase, the user can access data and experience some features even offline.
 
