@@ -9,12 +9,15 @@ USB in cloud is a fast, easy and powerful tool to store and access data using pe
 # Material-ui
 
 Material-ui is a powerful, user experience first library, highly inspired by Google maerial design. With it's demo driven documentation it's easier to create interactive components in a flexible way, making time to market smaller for a frontend dev.
-Chekout the [installation](https://material-ui.com/getting-started/installation/) guide and make your first react app using Material-ui.
+
+Checkout the [installation](https://material-ui.com/getting-started/installation/) guide and make your first react app using Material-ui.
+
 Alternatively, [material.io](https://material.io/collections/get-started) is the official Google ressource for best practises and ready to implement components for wide usage(Angular, react...).
 
 # Firebase
 
-
+Firebase is the all in one to go platform when it comes to BaaS. It covers Cloud storage, databases, hosting and more, to seamlessly provide your next app with all the tools needed to make authenticate users, host and monitor your app performance.
 
 # PWA
+
 
