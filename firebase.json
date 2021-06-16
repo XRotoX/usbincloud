@@ -1,7 +1,7 @@
 {
   "hosting": {
-    "site": "usbincloud",
-    "public": "public",
+    "site": "usb-in-cloud",
+    "public": "build",
     "ignore": [
       "firebase.json",
       "**/.*",

@@ -10,6 +10,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import ShareIcon from '@material-ui/icons/Share';
 import FilterNoneRoundedIcon from '@material-ui/icons/FilterNoneRounded';
+import { database } from '../../utils/Firebase'
 
 
 const styles = (theme) => ({
@@ -55,10 +56,14 @@ const DialogActions = withStyles((theme) => ({
 
 export default function ShareDialog(props) {
   const [open, setOpen] = React.useState(false);
-  const [link, setLink] = React.useState(`https://www.usbincloud.ml/s/${props.id}`)
+  const [link, setLink] = React.useState(`https://usb-in-cloud.web.app/s/${props.metadata.id}`)
 
 
   const handleClickOpen = () => {
+    const db = props.metadata.type === "file" ? database.files : database.folders
+    db.doc(props.metadata.id).update({
+      isPublic: true
+    })
     setOpen(true);
   };
   const handleClose = () => {

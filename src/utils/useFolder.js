@@ -62,7 +62,10 @@ export function useFolder(folderId = null, folder = null) {
   const { currentUser } = useAuth()
 
   useEffect(() => {
-    dispatch({ type: ACTIONS.SELECT_FOLDER, payload: { folderId, folder } })
+    dispatch({
+      type: ACTIONS.SELECT_FOLDER,
+      payload: { folderId, folder }
+    })
   }, [folderId, folder])
 
   useEffect(() => {

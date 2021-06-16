@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react"
 import firebase from "firebase/app"
-import { auth } from "./Firebase"
+import { auth, database } from "./Firebase"
 
 const AuthContext = React.createContext()
 
@@ -8,18 +8,40 @@ export function useAuth() {
   return useContext(AuthContext)
 }
 
+
+
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState()
   const [loading, setLoading] = useState(true)
 
-  function signup(email, password) {
-    return auth.createUserWithEmailAndPassword(email, password)
+  async function signup(firstName, lastName, email, password) {
+    const r = await auth.createUserWithEmailAndPassword(email, password)
+    console.log(r);
+    try {
+      database.users.add({
+        firstName: firstName,
+        lastName: lastName,
+        id: r.user.uid
+      })
+    } catch (error) {
+      console.log(error);
+    };
+    
+    return r
   }
 
-  function signupWithGoogle(){
+  async function signupWithGoogle() {
     var provider = new firebase.auth.GoogleAuthProvider()
-    return auth.signInWithPopup(provider)
+    const r = await auth.signInWithPopup(provider)
+    console.log(r)
+    database.users.add({
+      firstName: "",
+      lastName: "",
+      id: r.user.uid
+    })
+    return r
   }
+
   function signin(email, password) {
     return auth.signInWithEmailAndPassword(email, password)
   }

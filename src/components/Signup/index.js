@@ -83,8 +83,7 @@ export default function SignUp() {
     try {
       setError('')
       setLoading(true)
-      console.log(emailRef.current.value)
-      await signup(emailRef.current.value, passRef.current.value)
+      await signup(fnameRef.current.value, lnameRef.current.value, emailRef.current.value, passRef.current.value)
       history.push('/dashboard')
     } catch (error) {
       console.log(error.message)

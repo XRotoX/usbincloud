@@ -13,6 +13,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 //
 import CheckoutForm from './payment';
+import EmptyDirectory from '../components/EmptyDirectory'
 
 
 
@@ -22,7 +23,6 @@ export default function Dashboard(props) {
     const { state = {} } = useLocation()
     const { folder, childFolders, childFiles } = useFolder(itemId, state.folder)
 
-    console.log({ folder, childFolders, childFiles })
 
     if (folder) document.title = folder.name === "Root" ? "Home | USB in Cloud" : `${folder.name} | USB in Cloud`;
 
@@ -44,6 +44,9 @@ export default function Dashboard(props) {
                                         <File key={childFile.id} metadata={{...childFile, "type":"file"}} />
                                     ))
                                 )}
+                                {childFolders.length === 0 && childFiles.length === 0 && (
+                                    <EmptyDirectory />
+                                ) }
                             </CenteredGrid>
                         </Suspense>
                     </Grid>

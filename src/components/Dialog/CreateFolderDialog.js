@@ -70,6 +70,12 @@ export default function FormDialog({ currentFolder, open, setOpen }) {
             //TODO restrict folder name: regex
             if (currentFolder == null) return
 
+            const emptyRegex = new RegExp("^(?!\s*$).+");
+            const invalidRegex = new RegExp('[~"#%&*:<>?/\\{|}]+');
+
+            if(!emptyRegex.test(name)) throw "Empty name."
+            if(invalidRegex.test(name)) throw "Invalid characters."
+
             const path = [...currentFolder.path]
             if (currentFolder !== ROOT_FOLDER) {
                 path.push({id: currentFolder.id })
@@ -77,7 +83,7 @@ export default function FormDialog({ currentFolder, open, setOpen }) {
 
             
             await database.folders.add({
-                name: name,
+                name: name.trim(),
                 parentId: currentFolder.id,
                 userId: currentUser.uid,
                 path: path,
@@ -90,7 +96,7 @@ export default function FormDialog({ currentFolder, open, setOpen }) {
             setOpen(false)
         } catch (error) {
             console.log(error)
-            setError("Error: couldn\'t create a new folder")
+            setError(`Error: couldn\'t create a new folder: ${error}`)
         }
         setSnackbar(true)
         setLoading(false)

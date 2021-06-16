@@ -106,6 +106,10 @@ export default function Navigation(props) {
     setAnchorEl(null);
   };
 
+  const handleProfile = () => {
+    history.push('/profile')
+  };
+
   async function handleLogout(e) {
     e.preventDefault()
     try {
@@ -138,14 +142,14 @@ export default function Navigation(props) {
           </Typography>
           {auth && (
             <div>
-              <IconButton 
+              {/* <IconButton 
                 disabled
                 aria-controls="menu-appbar"
                 onClick={handleTheme}
                 color="inherit"
               >
                 {props.dark === "true" ? (<Brightness4RoundedIcon />) : (<Brightness7RoundedIcon />)}
-              </IconButton>
+              </IconButton> */}
               <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
@@ -170,7 +174,7 @@ export default function Navigation(props) {
                 open={menuOpen}
                 onClose={handleClose}
               >
-                <MenuItem disabled onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleProfile}>Profile</MenuItem>
                 <MenuItem onClick={handleLogout} disabled={loading}>Logout</MenuItem>
               </Menu>
             </div>

@@ -17,6 +17,13 @@ const handleGithubLink = () => {
 const handleHomeLink = () => {
   window.open('/dashboard', '_self');
 }
+
+const handleProfileLink = () => {
+  window.open('/profile', '_self');
+}
+
+
+
 export const mainListItems = (
   <div>
     <ListItem
@@ -28,7 +35,9 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Home" />
     </ListItem>
-    <ListItem button disabled>
+    <ListItem
+      button
+      onClick={handleProfileLink}>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>

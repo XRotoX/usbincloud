@@ -112,7 +112,7 @@ export default function SignUp() {
         
         {message &&
           <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="error">
+            <Alert onClose={handleClose} severity="success">
               {message}
             </Alert>
           </Snackbar>

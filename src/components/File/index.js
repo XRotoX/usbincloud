@@ -19,6 +19,7 @@ import Avatar from '@material-ui/core/Avatar';
 import FolderIcon from '@material-ui/icons/Folder';
 import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile'
 import ShareDialog from '../Dialog/ShareDialog'
+import RenameDialog from '../Dialog/RenameDialog'
 import CustomSnackbar from '../Snackbar'
 import { database } from '../../utils/Firebase'
 
@@ -44,6 +45,7 @@ export default function File({ metadata }) {
     const [error, setError] = useState(false)
     const [success, setSuccess] = useState(false)
     const [message, setMessage] = useState('')
+    const [rename, setRename] = useState(false)
     const open = Boolean(anchorEl);
 
 
@@ -55,6 +57,10 @@ export default function File({ metadata }) {
           };
         },[]);
 
+    const handleRename = () => {
+        handleClose()
+        setRename(true)
+    }
     const handleDelete = async () => {
         setAnchorEl(null);
         setError(false)
@@ -62,8 +68,7 @@ export default function File({ metadata }) {
         setMessage('')
         try {
             const db = metadata.type === "file" ? database.files : database.folders 
-            console.log(metadata.id);
-            await db.doc(metadata.id).delete()
+            await db.doc(metadata.id).delete() // Can be extended to delete childs, now it keeps them.
             setSuccess(true)
             setMessage("Deleted successfully")
         } catch (error) {
@@ -72,21 +77,6 @@ export default function File({ metadata }) {
         }
     }
 
-    const handleRename = async () => {
-        setAnchorEl(null);
-        setError(false)
-        setSuccess(false)
-        setMessage('')
-        try {
-            const db = metadata.type === "file" ? database.files : database.folders 
-            await db.doc(metadata.id).update({name: "Renamed3"})
-            setSuccess(true)
-            setMessage("Renamed successfully")
-        } catch (error) {
-            setError(false)
-            setMessage("Error: Couldn\'t rename item")
-        }
-    }
 
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
@@ -115,7 +105,7 @@ export default function File({ metadata }) {
 
                     }
                     title={<Typography className={classes.title}>{metadata.name}</Typography>}
-                    subheader={metadata.createdAt.toDate().toLocaleDateString('fr-FR') || "now"}
+                    subheader={metadata.createdAt !== null ? metadata.createdAt.toDate().toLocaleDateString('fr-FR') : "Now"}
                     className={classes.CardHeader}
                 />
                 <Menu
@@ -138,7 +128,7 @@ export default function File({ metadata }) {
                 </Menu>
 
                 <CardActionArea
-                    href={metadata.type === "file" ? metadata.url : "/dashboard/i/" + metadata.id}
+                    href={metadata.type === "file" ? metadata.url : "https://usb-in-cloud.web.app/dashboard/i/" + metadata.id}
                     target={metadata.type === "file" ? "_blank" : ""}>
                     {loading ?
                         (
@@ -149,7 +139,7 @@ export default function File({ metadata }) {
                                 alt="File"
                                 height="140"
                                 image={metadata.url ? metadata.url : "https://conceptdraw.com/a1717c3/p2/preview/640/pict--file-folder-office-vector-stencils-library"}
-                                title="Contemplative Reptile"
+                                title={metadata.name}
                             />
                         )
                     }
@@ -169,10 +159,11 @@ export default function File({ metadata }) {
                     )
                     }
                     
-                    <ShareDialog name="Hiprops" id={metadata.id}/>
+                    <ShareDialog name="Hiprops" metadata={metadata}/>
                 </CardActions>
             </Card>
             <CustomSnackbar status={success ? 0 : 1} message={message} setMessage={setMessage}/>
+            <RenameDialog metadata={metadata} open={rename} setOpen={setRename}/>
         </Grid>
     );
 }

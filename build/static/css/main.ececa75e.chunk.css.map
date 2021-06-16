@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/components/File/style.css"],"names":[],"mappings":"AAAA,qBACI,wBACJ,CACA,qBACI,yBACJ","file":"main.ececa75e.chunk.css","sourcesContent":[".MuiCardHeader-title{\n    font-size: 1rem !important;\n}\n.MuiTypography-body1 {\n    font-size: .8rem !important;\n}"]}

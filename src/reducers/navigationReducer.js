@@ -3,6 +3,7 @@ import navigationActions from '../actions/navigationActions'
 const initialState = {
     open: true
 }
+
 export default function navigationReducer(state=initialState, action) {
     switch (action.type) {
         default:
