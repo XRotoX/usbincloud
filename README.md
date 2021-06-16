@@ -2,7 +2,7 @@
 
 This project can be found at [the following link](https://usb-in-cloud.web.app/).
 
-USB in cloud is a google drive concept clone, it allows users to store files in an hierarchical composition to help arranging content based on their subjects and themes
+USB in cloud is a Google drive concept clone, it allows users to store files in an hierarchical composition to help arranging content based on their subjects and themes.
 
 USB in cloud is a fast, easy and powerful tool to store and access data using personal account from anywhere.
 
@@ -16,8 +16,11 @@ Alternatively, [material.io](https://material.io/collections/get-started) is the
 
 # Firebase
 
-Firebase is the all in one to go platform when it comes to BaaS. It covers Cloud storage, databases, hosting and more, to seamlessly provide your next app with all the tools needed to make authenticate users, host and monitor your app performance.
+Firebase is the all in one to go platform when it comes to BaaS. It covers Cloud storage, databases, hosting and more. To seamlessly provide your next app with all the tools needed to authenticate users, host and monitor your app performance.
 
 # PWA
 
+When it comes to optimizing the user experience and the eye contact needed for more often usage and engagement, it is neccessary to be installed on the user's device. PWA makes converting your web app to an installable one easy, with a call to action button embeded in the browser. 
+
+Given the features provided by Firebase, the user can access data and experience some features even offline.
 
