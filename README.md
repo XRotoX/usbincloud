@@ -33,8 +33,6 @@ Given the features provided by Firebase, the user can access data and experience
 
 # How to use/deploy?
 
-- Verify that you have nodejs installed on your machine by typing node -v 
-
 ```linux
 $ git clone https://github.com/XRotoX/usbincloud.git
 $ cd usbincloud/
