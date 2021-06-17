@@ -43,8 +43,6 @@ $ npm start
 Note: You can also serve the app from the latest build.
 
 ```linux
-$ git clone https://github.com/XRotoX/usbincloud.git
-$ cd usbincloud/
 $ npm install -g serve
 $ serve -s build
 ```
